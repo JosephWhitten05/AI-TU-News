@@ -7,20 +7,6 @@
   <meta name="description" content="{{ summary or site.description }}">
   <link rel="icon" href="/images/logo.jpg">
   <link rel="stylesheet" href="/css/style.css">
-  {%- if page.url == "/" %}
-  {#- Netlify Identity invite/password-reset links land on the homepage; this finishes the login and sends officers to /admin. #}
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      if (!window.netlifyIdentity) return;
-      window.netlifyIdentity.on("init", function (user) {
-        if (!user) {
-          window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
-        }
-      });
-    });
-  </script>
-  {%- endif %}
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

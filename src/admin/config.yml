@@ -1,7 +1,10 @@
 # Decap CMS configuration — https://decapcms.org/docs/configuration-options/
 
+# Officers log in with their GitHub account (they must be collaborators on the
+# repo). Netlify handles the GitHub login via its OAuth provider.
 backend:
-  name: git-gateway
+  name: github
+  repo: JosephWhitten05/AI-TU-News
   branch: main
 
 # Lets you try the CMS locally without logging in:
