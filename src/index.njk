@@ -1,0 +1,87 @@
+---
+layout: base.njk
+title: AI @ TU
+---
+<section class="hero">
+  <div class="container hero__inner">
+    <img class="hero__mark" src="/images/logo.jpg" alt="AI @ TU logo: a tiger's face, half drawn as circuitry" width="512" height="512">
+    <div>
+      <h1 class="hero__headline">This week in AI, decoded</h1>
+      <p class="hero__subhead">Curated by Towson University's AI club</p>
+    </div>
+  </div>
+</section>
+
+{%- set latest = collections.articles | first %}
+<section class="teaser" aria-labelledby="latest-heading">
+  <div class="container teaser__inner">
+    <p class="latest" id="latest-heading">Latest</p>
+    {%- if latest %}
+    <h2 class="teaser__title"><a href="{{ latest.url }}">{{ latest.data.title }}</a></h2>
+    {%- if latest.data.summary %}
+    <p class="teaser__summary">{{ latest.data.summary }}</p>
+    {%- endif %}
+    {%- set highlights = [
+      { key: "pick", label: "Pick of the Week", data: latest.data.pick },
+      { key: "threat", label: "Threat Watch", data: latest.data.threat },
+      { key: "tip", label: "Tip of the Week", data: latest.data.tip }
+    ] %}
+    <ul class="teaser__sections">
+      {%- for item in highlights %}
+      {%- if item.data and item.data.headline %}
+      <li>
+        <a href="{{ latest.url }}#{{ item.key }}">
+          <span class="teaser__section-label">{{ item.label }}</span>
+          <span class="teaser__section-headline">{{ item.data.headline }}</span>
+        </a>
+      </li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+    <p class="teaser__meta">
+      <time datetime="{{ latest.date | isoDay }}">{{ latest.date | readableDate }}</time>
+      <a class="teaser__read" href="{{ latest.url }}">Read <span class="visually-hidden">{{ latest.data.title }}</span>&rarr;</a>
+    </p>
+    {%- else %}
+    <p class="teaser__summary">The first issue is on its way. Check back soon.</p>
+    {%- endif %}
+  </div>
+</section>
+
+<div class="container home-grid">
+  <section class="home-section" aria-labelledby="events-heading">
+    <h2 class="section-label" id="events-heading">Upcoming events</h2>
+    <ul class="chips" data-event-list data-limit="2">
+      {%- for event in collections.events | head(3) %}
+      <li data-event-date="{{ event.date | isoDay }}"{% if loop.index > 2 %} hidden{% endif %}>
+        <a class="chip" href="/meetings/">
+          <span class="chip__date">{{ event.date | shortDate }}</span>
+          <span class="chip__title">{{ event.data.title }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="muted" data-event-empty{% if collections.events | length %} hidden{% endif %}>
+      No upcoming events right now. See <a href="/meetings/">Meetings</a> for our regular schedule.
+    </p>
+  </section>
+
+  <section class="home-section" aria-labelledby="archive-heading">
+    <h2 class="section-label" id="archive-heading">Archive</h2>
+    {%- if collections.archive | length %}
+    <ul class="archive-preview">
+      {%- for month in collections.archive | head(4) %}
+      <li>
+        <a href="/news/#{{ month.id }}">
+          <span class="archive-preview__month">{{ month.label }}</span>
+          <span class="archive-preview__count">{{ month.weeks | length }} {{ "week" if month.weeks | length == 1 else "weeks" }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p><a href="/news/">All news &rarr;</a></p>
+    {%- else %}
+    <p class="muted">Past weeks will be collected here.</p>
+    {%- endif %}
+  </section>
+</div>

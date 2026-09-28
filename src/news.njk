@@ -1,0 +1,47 @@
+---
+layout: base.njk
+title: News
+permalink: /news/
+---
+<div class="container page">
+  <header class="page__header">
+    <h1>News</h1>
+    <p class="page__intro">Every weekly issue, grouped by month. Weeks run Tuesday to Monday.</p>
+  </header>
+
+  {%- if collections.archive | length %}
+  <div class="archive">
+    {%- for month in collections.archive %}
+    {%- set newestMonth = loop.first %}
+    <details class="archive__month" id="{{ month.id }}"{% if newestMonth %} open{% endif %}>
+      <summary>
+        <span class="archive__label">{{ month.label }}</span>
+        <span class="archive__count">{{ month.weeks | length }} {{ "week" if month.weeks | length == 1 else "weeks" }}</span>
+      </summary>
+
+      {%- for week in month.weeks %}
+      <details class="archive__week" id="{{ week.id }}"{% if newestMonth and loop.first %} open{% endif %}>
+        <summary>
+          <span class="archive__label">{{ week.label }}</span>
+          <span class="archive__count">{{ week.articles | length }} {{ "issue" if week.articles | length == 1 else "issues" }}</span>
+        </summary>
+        <ul class="archive__articles">
+          {%- for article in week.articles %}
+          <li>
+            <a class="archive__title" href="{{ article.url }}">{{ article.data.title }}</a>
+            <time class="archive__date" datetime="{{ article.date | isoDay }}">{{ article.date | readableDate }}</time>
+            {%- if article.data.summary %}
+            <p class="archive__summary">{{ article.data.summary }}</p>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </details>
+      {%- endfor %}
+    </details>
+    {%- endfor %}
+  </div>
+  {%- else %}
+  <p class="muted">No issues yet. The first one is on its way.</p>
+  {%- endif %}
+</div>

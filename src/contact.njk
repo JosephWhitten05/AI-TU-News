@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Contact
+permalink: /contact/
+---
+<div class="container page">
+  <header class="page__header">
+    <h1>Contact</h1>
+    <p class="page__intro">Questions, speaker ideas, or want to get involved? Send us a message.</p>
+  </header>
+
+  {#- Netlify Forms picks this up at deploy time; submissions show in the Netlify dashboard under Forms. #}
+  <form class="form" name="contact" method="POST" action="/contact/thanks/" data-netlify="true" data-netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="contact">
+    {#- Honeypot: hidden from people, but spam bots fill it in and get discarded. #}
+    <p class="visually-hidden" aria-hidden="true">
+      <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+    </p>
+    <p class="form__field">
+      <label for="contact-name">Name</label>
+      <input id="contact-name" type="text" name="name" autocomplete="name" required>
+    </p>
+    <p class="form__field">
+      <label for="contact-email">Email</label>
+      <input id="contact-email" type="email" name="email" autocomplete="email" required>
+    </p>
+    <p class="form__field">
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" name="message" rows="7" required></textarea>
+    </p>
+    <p><button class="button" type="submit">Send message</button></p>
+  </form>
+</div>

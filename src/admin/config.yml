@@ -1,0 +1,140 @@
+# Decap CMS configuration — https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Lets you try the CMS locally without logging in:
+#   npx decap-server   (in one terminal)
+#   npm run dev        (in another), then open http://localhost:8080/admin/
+# Ignored on the live site.
+local_backend: true
+
+# Uploaded images (event flyers) are committed here and served from /images/uploads.
+media_folder: src/images/uploads
+public_folder: /images/uploads
+
+logo_url: /images/logo.jpg
+
+# Date fields store a plain calendar day (YYYY-MM-DD, no time) so an article or
+# event never slips to a neighboring day; the site reads them as Eastern time.
+
+collections:
+  - name: articles
+    label: News
+    label_singular: News Issue
+    description: One issue per week (weeks run Tuesday–Monday). Any of the three written sections can be left blank; it just won't appear.
+    folder: src/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: MMM D, YYYY
+        time_format: false
+        picker_utc: true
+        default: "{{now}}"
+        hint: Decides which week and month the issue is filed under in the archive (weeks run Tuesday–Monday).
+      - label: Summary
+        name: summary
+        widget: text
+        hint: 1–2 sentences shown on the homepage and in the archive. Handy to reuse as your Instagram caption.
+      - label: AI Pick of the Week
+        name: pick
+        widget: object
+        required: false
+        collapsed: false
+        hint: One important AI development members should know.
+        fields:
+          - { label: Headline, name: headline, widget: string, required: false }
+          - { label: Text, name: body, widget: markdown, required: false }
+      - label: AI Threat Watch
+        name: threat
+        widget: object
+        required: false
+        collapsed: false
+        hint: A recent AI security/threat issue and what students should know about it.
+        fields:
+          - { label: Headline, name: headline, widget: string, required: false }
+          - { label: Text, name: body, widget: markdown, required: false }
+      - label: AI Tip of the Week
+        name: tip
+        widget: object
+        required: false
+        collapsed: false
+        hint: A practical prompt, tool, workflow, or AI learning tip.
+        fields:
+          - { label: Headline, name: headline, widget: string, required: false }
+          - { label: Text, name: body, widget: markdown, required: false }
+      - label: AI@TU Events (extra notes)
+        name: eventsNote
+        widget: markdown
+        required: false
+        hint: Upcoming events you've posted under Events are listed automatically. Use this for anything without a flyer — collaborations, opportunities, reminders.
+
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: src/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: 'Keep it short, e.g. "AI 101: Prompt Engineering". Shown in the homepage''s upcoming-events list and used (with the date) as the flyer''s description for screen readers.' 
+      - label: Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: MMM D, YYYY
+        time_format: false
+        picker_utc: true
+        default: "{{now}}"
+        hint: The day of the event. The flyer disappears from the site automatically once this day has passed.
+      - label: Flyer
+        name: flyer
+        widget: image
+      - label: Link
+        name: link
+        widget: string
+        required: false
+        hint: Optional. If filled in (e.g. an RSVP form or Discord invite), the flyer becomes clickable.
+
+  - name: settings
+    label: Meeting Info
+    label_singular: Meeting Info
+    files:
+      - name: meetings
+        label: Meeting times
+        file: src/_data/meetings.json
+        fields:
+          - label: Day
+            name: day
+            widget: string
+            required: false
+            hint: e.g. "Wednesdays"
+          - label: Time
+            name: time
+            widget: string
+            required: false
+            hint: e.g. "6:00–7:00 PM"
+          - label: Location
+            name: location
+            widget: string
+            required: false
+            hint: e.g. "Cook Library, Room 507"
+          - label: Note
+            name: note
+            widget: text
+            required: false
+            hint: Optional extra line, e.g. "Times can change week to week — check our Instagram." Leave any field blank to hide it.

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title and title != site.title %}{{ title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ summary or site.description }}">
+  <link rel="icon" href="/images/logo.jpg">
+  <link rel="stylesheet" href="/css/style.css">
+  {%- if page.url == "/" %}
+  {#- Netlify Identity invite/password-reset links land on the homepage; this finishes the login and sends officers to /admin. #}
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      if (!window.netlifyIdentity) return;
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
+        }
+      });
+    });
+  </script>
+  {%- endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-logo" href="/">AI @ TU</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          {%- set navItems = [
+            { url: "/news/", label: "News" },
+            { url: "/meetings/", label: "Meetings" },
+            { url: "/contact/", label: "Contact" }
+          ] %}
+          {%- for item in navItems %}
+          <li><a href="{{ item.url }}"{% if page.url.startsWith(item.url) %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>&copy; {{ year }} AI @ TU · Artificial Intelligence Club at Towson University</span>
+      <nav aria-label="Footer">
+        <a href="/news/">News</a> ·
+        <a href="/meetings/">Meetings</a> ·
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

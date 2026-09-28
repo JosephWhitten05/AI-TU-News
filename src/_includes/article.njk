@@ -1,0 +1,63 @@
+---
+layout: base.njk
+---
+{#- A weekly news issue. Pick / Threat Watch / Tip are optional; a skipped one is left out.
+    AI@TU Events is filled from the events collection, plus an optional note. #}
+{%- set sections = [
+  { key: "pick", label: "AI Pick of the Week", data: pick },
+  { key: "threat", label: "AI Threat Watch", data: threat },
+  { key: "tip", label: "AI Tip of the Week", data: tip }
+] %}
+{%- set issueEvents = collections.allEvents | eventsForIssue(date) %}
+<article class="container article">
+  <header class="article__header">
+    <p class="article__date"><time datetime="{{ date | isoDay }}">{{ date | readableDate }}</time></p>
+    <h1>{{ title }}</h1>
+    {%- if summary %}
+    <p class="article__summary">{{ summary }}</p>
+    {%- endif %}
+  </header>
+
+  {%- for section in sections %}
+  {%- if section.data and (section.data.headline or section.data.body) %}
+  <section class="issue-section issue-section--{{ section.key }}" id="{{ section.key }}" aria-labelledby="{{ section.key }}-heading">
+    <p class="issue-section__label">{{ section.label }}</p>
+    {%- if section.data.headline %}
+    <h2 id="{{ section.key }}-heading">{{ section.data.headline }}</h2>
+    {%- else %}
+    <h2 id="{{ section.key }}-heading" class="visually-hidden">{{ section.label }}</h2>
+    {%- endif %}
+    <div class="prose">
+      {{ section.data.body | markdown | safe }}
+    </div>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+
+  <section class="issue-section issue-section--events" id="events" aria-labelledby="events-heading">
+    <p class="issue-section__label">AI@TU Events</p>
+    <h2 id="events-heading" class="visually-hidden">AI@TU Events</h2>
+    {%- if issueEvents | length %}
+    <ul class="chips">
+      {%- for event in issueEvents %}
+      <li>
+        <a class="chip" href="{{ event.data.link or '/meetings/' }}">
+          <span class="chip__date">{{ event.date | shortDate }}</span>
+          <span class="chip__title">{{ event.data.title }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+    {%- if eventsNote %}
+    <div class="prose issue-section__note">
+      {{ eventsNote | markdown | safe }}
+    </div>
+    {%- endif %}
+    {%- if not (issueEvents | length) and not eventsNote %}
+    <p>No events announced this week. See <a href="/meetings/">Meetings</a> for our regular schedule.</p>
+    {%- endif %}
+  </section>
+
+  <p class="article__back"><a href="/news/">&larr; All news</a></p>
+</article>

@@ -1,0 +1,15 @@
+{
+  "name": "ai-at-tu-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The official website for the Artificial Intelligence Club at Towson University. Publishes weekly AI news articles and club event flyers.",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "markdown-it": "^14.3.2"
+  }
+}

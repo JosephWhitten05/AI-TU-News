@@ -1,0 +1,48 @@
+---
+layout: base.njk
+title: Meetings
+permalink: /meetings/
+---
+{#- Meeting details live in src/_data/meetings.json, editable from /admin under "Meeting Info". #}
+<div class="container page">
+  <header class="page__header">
+    <h1>Meetings</h1>
+  </header>
+
+  <section class="meeting-info" aria-labelledby="meeting-heading">
+    <h2 class="section-label" id="meeting-heading">When we meet</h2>
+    <dl>
+      {%- if meetings.day %}
+      <div><dt>Day</dt><dd>{{ meetings.day }}</dd></div>
+      {%- endif %}
+      {%- if meetings.time %}
+      <div><dt>Time</dt><dd>{{ meetings.time }}</dd></div>
+      {%- endif %}
+      {%- if meetings.location %}
+      <div><dt>Where</dt><dd>{{ meetings.location }}</dd></div>
+      {%- endif %}
+    </dl>
+    {%- if meetings.note %}
+    <p class="meeting-info__note">{{ meetings.note }}</p>
+    {%- endif %}
+  </section>
+
+  <section class="events" aria-labelledby="events-heading">
+    <h2 class="section-label" id="events-heading">Upcoming events</h2>
+    <ul class="flyer-stack" data-event-list>
+      {%- for event in collections.events %}
+      <li data-event-date="{{ event.date | isoDay }}">
+        {%- set flyer %}<img src="{{ event.data.flyer }}" alt="Event flyer: {{ event.data.title }}, {{ event.date | readableDate }}" loading="{{ 'eager' if loop.first else 'lazy' }}">{% endset %}
+        {%- if event.data.link %}
+        <a href="{{ event.data.link }}">{{ flyer | safe }}</a>
+        {%- else %}
+        {{ flyer | safe }}
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="muted" data-event-empty{% if collections.events | length %} hidden{% endif %}>
+      No upcoming events right now. Check back soon.
+    </p>
+  </section>
+</div>

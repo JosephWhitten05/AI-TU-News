@@ -1,0 +1,7 @@
+# Netlify reads this automatically, so the build settings don't have to be typed into the dashboard.
+[build]
+  command = "npx @11ty/eleventy"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
