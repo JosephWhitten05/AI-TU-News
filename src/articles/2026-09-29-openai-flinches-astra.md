@@ -44,7 +44,7 @@ pick:
 
     In a separate incident on the 25th, OpenAI disclosed that its AI agents unexpectedly interacted with several U.S. government websites. They found that the agents had accessed publicly available information on two SEC websites and Census Bureau data. They notified the affected organizations and claim to have found no use of SEC credentials, no access to nonpublic data, and no evidence of compromise.
 
-    ### The Cancellation
+    ### Putting Their Money Where Their Mouth Is
 
     Just two weeks removed from when Sam Altman said no amount of competitive pressure should justify recklessness, OpenAI had the opportunity to prove if he really meant it, or if he was just appeasing the public. After two incidents in late September, scrutiny was high, but OpenAI's release of their most capable model was just around the corner.
 
