@@ -11,7 +11,8 @@ layout: base.njk
 {%- set issueEvents = collections.allEvents | eventsForIssue(date) %}
 <article class="container article">
   <header class="article__header">
-    <p class="article__date"><time datetime="{{ date | isoDay }}">{{ date | readableDate }}</time></p>
+    <p class="article__date"><time datetime="{{ date | isoDay }}">{{ date | readableDate }}</time>
+      {%- if author %}<span class="article__sep" aria-hidden="true"> · </span><span class="article__byline">By {{ author }}</span>{% endif %}</p>
     <h1>{{ title }}</h1>
     {%- if summary %}
     <p class="article__summary">{{ summary }}</p>

@@ -581,6 +581,12 @@ a:hover {
   text-transform: uppercase;
 }
 
+/* On phones the byline gets its own line instead of wrapping mid-title */
+@media (max-width: 700px) {
+  .article__sep { display: none; }
+  .article__byline { display: block; }
+}
+
 .article__summary {
   margin: 1rem 0 0;
   max-width: var(--reading-width);

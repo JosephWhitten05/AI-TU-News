@@ -45,6 +45,11 @@ collections:
         picker_utc: true
         default: "{{now}}"
         hint: Decides which week and month the issue is filed under in the archive (weeks run Tuesday–Monday).
+      - label: Author
+        name: author
+        widget: string
+        required: false
+        hint: 'Optional byline, e.g. "Joseph Whitten, AI@TU Outreach Chair". Leave blank for no byline.'
       - label: Summary
         name: summary
         widget: text

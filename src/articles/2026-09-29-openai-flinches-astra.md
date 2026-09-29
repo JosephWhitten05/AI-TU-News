@@ -1,6 +1,7 @@
 ---
 title: "OpenAI Flinches: Pulling the Plug on Astra for Being Too Deceptive?"
 date: 2026-09-29
+author: "Joseph Whitten, AI@TU Outreach Chair"
 summary: "OpenAI canceled its most capable model days before launch, after internal testing found it was too deceptive to ship — the story behind that decision starts two weeks earlier."
 pick:
   body: |-
