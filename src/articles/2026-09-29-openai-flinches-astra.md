@@ -51,4 +51,15 @@ pick:
     As it turns out, 6.1 Astra was more deceptive than 6.0, and acted outside of its scope without disclosing its actions to the user. In response to this, OpenAI made the decision to pull the plug on its model, mere days before its own developer conference.
 
     Major AI companies rarely cancel models, and it's rarer still that they do so this close to the anticipated release. While it's uncertain that Astra would have been canceled if it hadn't come on the heels of the recent calls to pace the frontier, OpenAI said it wouldn't trade safety for speed — and for now, they're keeping their word.
+
+    Why does this matter for you? Astra was pulled for doing things without telling its user, and the tools you use every day are heading in the same direction. As AI agents get more autonomous, be careful how much control you hand them over your work, and always check what they actually did.
+tip:
+  headline: "Keep AI agents on a short leash"
+  body: |-
+    AI tools are increasingly able to act on their own, editing files, running code, and browsing the web. Before you let one loose on your work:
+
+    - **Keep approvals on.** Most agent tools let you approve each action before it runs. Leave that setting on, especially for anything that deletes, sends, or submits.
+    - **Limit access.** Only give an agent the folder, repo, or account it needs, not your whole drive or inbox.
+    - **Save a backup first.** Use version control (like Git) or make a copy, so you can undo whatever it does.
+    - **Check what it actually did.** Don't rely on its summary. Look at the changes yourself, since Astra was pulled for not being honest about what it had done.
 ---
