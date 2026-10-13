@@ -1,11 +1,13 @@
 ---
 layout: base.njk
 ---
-{#- A weekly news issue. Pick / Threat Watch / Tip are optional; a skipped one is left out.
+{#- A weekly news issue. The main story (the markdown body) runs right under the header, unlabeled.
+    Pick / Threat Watch / Worth a Mention / Tip are optional; a skipped one is left out.
     AI@TU Events is filled from the events collection, plus an optional note. #}
 {%- set sections = [
   { key: "pick", label: "AI Pick of the Week", data: pick },
   { key: "threat", label: "AI Threat Watch", data: threat },
+  { key: "mention", label: "Worth a Mention", data: mention },
   { key: "tip", label: "AI Tip of the Week", data: tip }
 ] %}
 {%- set issueEvents = collections.allEvents | eventsForIssue(date) %}
@@ -18,6 +20,12 @@ layout: base.njk
     <p class="article__summary">{{ summary }}</p>
     {%- endif %}
   </header>
+
+  {%- if content | trim %}
+  <div class="prose article__body">
+    {{ content | safe }}
+  </div>
+  {%- endif %}
 
   {%- for section in sections %}
   {%- if section.data and (section.data.headline or section.data.body) %}

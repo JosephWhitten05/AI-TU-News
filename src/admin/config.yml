@@ -26,7 +26,7 @@ collections:
   - name: articles
     label: News
     label_singular: News Issue
-    description: One issue per week (weeks run Tuesday–Monday). Any of the three written sections can be left blank; it just won't appear.
+    description: One issue per week (weeks run Tuesday–Monday). Any of the written sections can be left blank; it just won't appear.
     folder: src/articles
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -54,6 +54,11 @@ collections:
         name: summary
         widget: text
         hint: 1–2 sentences shown on the homepage and in the archive. Handy to reuse as your Instagram caption.
+      - label: Main Story
+        name: body
+        widget: markdown
+        required: false
+        hint: Optional. The issue's main article, shown right under the title with no section label.
       - label: AI Pick of the Week
         name: pick
         widget: object
@@ -69,6 +74,15 @@ collections:
         required: false
         collapsed: false
         hint: A recent AI security/threat issue and what students should know about it.
+        fields:
+          - { label: Headline, name: headline, widget: string, required: false }
+          - { label: Text, name: body, widget: markdown, required: false }
+      - label: Worth a Mention
+        name: mention
+        widget: object
+        required: false
+        collapsed: false
+        hint: Optional. A fun or off-topic story that appears just above AI Tip of the Week.
         fields:
           - { label: Headline, name: headline, widget: string, required: false }
           - { label: Text, name: body, widget: markdown, required: false }

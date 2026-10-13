@@ -587,6 +587,11 @@ a:hover {
   .article__byline { display: block; }
 }
 
+.article__body {
+  max-width: 50rem;
+  margin-bottom: 3rem;
+}
+
 .article__summary {
   margin: 1rem 0 0;
   max-width: var(--reading-width);
@@ -594,7 +599,7 @@ a:hover {
   line-height: 1.6;
 }
 
-/* Issue sections: Pick / Threat Watch / Tip / Events */
+/* Issue sections: Pick / Threat Watch / Worth a Mention / Tip / Events */
 
 .issue-section {
   scroll-margin-top: 1.5rem;
@@ -654,6 +659,13 @@ a:hover {
   display: block;
   font-size: 0.8125rem;
   color: rgba(26, 26, 26, 0.7);
+}
+
+/* TikTok embeds are blockquotes; don't give them the pull-quote border. */
+.prose .tiktok-embed {
+  margin: 2em 0;
+  padding-left: 0;
+  border-left: 0;
 }
 
 .timeline {
