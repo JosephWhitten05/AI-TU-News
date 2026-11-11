@@ -35,7 +35,7 @@ In a national exit poll conducted by SSRS for NBC News, 56% of voters said AI an
 
 GPT-6 Cyber was recently released on November 5th by OpenAI, and it’s marketed as a gated model for vetted security teams through a specific program called Daybreak Red. It’s described as “critical” for cybersecurity by OpenAI’s own frameworks. They claim that the model built nearly one thousand Linux privilege-escalation exploits and found 81 previously unknown high-severity Firefox bugs.
 
-Google recently released Gemini 4 Carbon, which was also released to cyber defenders before the general public. We now have two different labs that have not released their most current models publicly due to security concerns. Today, November 10th, it was made public.
+Google recently released Gemini 4 Carbon, which was also released to cyber defenders before the general public. We now have two different labs that held back their most current models from the public due to security concerns. Today, November 10th, Gemini 4 Carbon was made public.
 
 Fireworks AI is a company that runs AI models for other companies. In October, they claimed that no customer models or datasets were accessed, but on November 9th, they said attackers who had gained access on October 24th through a third-party cloud provider reached billing data, secrets, datasets, and partial model weights. It’s reported that the attack was an instance of LLMjacking, a technique used by financially motivated hackers in which stolen cloud credentials are used to hijack AI accounts and models. Our last issue showed that while AI can help make attacks cheap, this issue shows that vendors who use AI as a business model are also targets.
 
